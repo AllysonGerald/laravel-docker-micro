@@ -1,0 +1,120 @@
+##@ 🐳 Docker Compose
+
+up: ## Inicia os containers em background
+	@echo "$(GREEN)🚀 Iniciando containers...$(NC)"
+	docker compose up -d
+
+up-build: ## Rebuild e inicia os containers
+	@echo "$(GREEN)🔨 Rebuilding e iniciando containers...$(NC)"
+	docker compose up -d --build
+
+down: ## Para e remove os containers
+	@echo "$(RED)🛑 Parando containers...$(NC)"
+	docker compose down
+
+down-volumes: ## Para containers e remove volumes (⚠️ APAGA DADOS!)
+	@echo "$(RED)⚠️  ATENÇÃO: Isso vai apagar todos os dados!$(NC)"
+	@read -p "Tem certeza? [s/N]: " confirm; \
+	if [ "$$confirm" = "s" ] || [ "$$confirm" = "S" ]; then \
+		docker compose down -v; \
+	else \
+		echo "Cancelado."; \
+	fi
+
+restart: ## Reinicia todos os containers
+	@echo "$(YELLOW)🔄 Reiniciando containers...$(NC)"
+	docker compose restart
+
+restart-php: ## Reinicia apenas o container PHP
+	@echo "$(YELLOW)🔄 Reiniciando PHP...$(NC)"
+	docker compose restart php
+
+restart-nginx: ## Reinicia apenas o container Nginx
+	@echo "$(YELLOW)🔄 Reiniciando Nginx...$(NC)"
+	docker compose restart nginx
+
+restart-mysql: ## Reinicia apenas o container MySQL
+	@echo "$(YELLOW)🔄 Reiniciando MySQL...$(NC)"
+	docker compose restart mysql
+
+restart-postgres: ## Reinicia apenas o container PostgreSQL
+	@echo "$(YELLOW)🔄 Reiniciando PostgreSQL...$(NC)"
+	docker compose restart postgres
+
+restart-mongodb: ## Reinicia apenas o container MongoDB
+	@echo "$(YELLOW)🔄 Reiniciando MongoDB...$(NC)"
+	docker compose restart mongodb
+
+restart-redis: ## Reinicia apenas o container Redis
+	@echo "$(YELLOW)🔄 Reiniciando Redis...$(NC)"
+	docker compose restart redis
+
+ps: ## Lista status dos containers
+	docker compose ps
+
+logs: ## Mostra logs de todos os containers
+	docker compose logs -f
+
+logs-php: ## Mostra logs do container PHP
+	docker compose logs -f php
+
+logs-nginx: ## Mostra logs do container Nginx
+	docker compose logs -f nginx
+
+logs-mysql: ## Mostra logs do container MySQL
+	docker compose logs -f mysql
+
+logs-postgres: ## Mostra logs do container PostgreSQL
+	docker compose logs -f postgres
+
+logs-mongodb: ## Mostra logs do container MongoDB
+	docker compose logs -f mongodb
+
+logs-redis: ## Mostra logs do container Redis
+	docker compose logs -f redis
+
+
+##@ 💻 Acesso aos Containers
+
+bash: ## Acessa bash do container PHP
+	docker compose exec php bash
+
+bash-nginx: ## Acessa bash do container Nginx
+	docker compose exec nginx sh
+
+bash-mysql: ## Acessa bash do container MySQL
+	docker compose exec mysql bash
+
+bash-postgres: ## Acessa bash do container PostgreSQL
+	docker compose exec postgres sh
+
+bash-mongodb: ## Acessa bash do container MongoDB
+	docker compose exec mongodb bash
+
+bash-redis: ## Acessa bash do container Redis
+	docker compose exec redis sh
+
+db: ## Conecta ao MySQL (root)
+	docker compose exec mysql mysql -u root -proot
+
+db-dev: ## Conecta ao MySQL (developer)
+	docker compose exec mysql mysql -u developer -p123456 db_laravel
+
+psql: ## Conecta ao PostgreSQL (developer)
+	docker compose exec postgres psql -U developer -d db_laravel
+
+psql-root: ## Conecta ao PostgreSQL (postgres)
+	docker compose exec postgres psql -U postgres
+
+mongo: ## Conecta ao MongoDB (developer)
+	docker compose exec mongodb mongosh -u developer -p 123456 --authenticationDatabase admin db_laravel
+
+mongo-root: ## Conecta ao MongoDB (root)
+	docker compose exec mongodb mongosh -u root -p 123456 --authenticationDatabase admin
+
+mongo-shell: ## Abre MongoDB shell interativo
+	docker compose exec mongodb mongosh
+
+redis-cli: ## Acessa Redis CLI
+	docker compose exec redis redis-cli
+
