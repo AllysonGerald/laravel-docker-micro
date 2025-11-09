@@ -80,8 +80,7 @@ storage-unlink: ## Remove link simbólico de storage
 
 permissions: ## Corrige permissões do Laravel
 	@echo "$(YELLOW)🔐 Corrigindo permissões...$(NC)"
-	docker compose exec php chmod -R 775 storage bootstrap/cache
-	docker compose exec php chown -R www-data:www-data storage bootstrap/cache
+	sudo chmod -R 775 laravel/storage laravel/bootstrap/cache
 	@echo "$(GREEN)✅ Permissões corrigidas!$(NC)"
 
 

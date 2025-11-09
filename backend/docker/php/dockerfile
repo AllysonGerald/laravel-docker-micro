@@ -53,6 +53,12 @@ RUN echo "expose_php = Off" >> /usr/local/etc/php/conf.d/security.ini \
 RUN groupadd -g 1000 developer \
     && useradd -u 1000 -ms /bin/bash -g developer user
 
+# Configure PHP-FPM to run as user
+RUN sed -i 's/user = www-data/user = user/g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's/group = www-data/group = developer/g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's/listen.owner = www-data/listen.owner = user/g' /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i 's/listen.group = www-data/listen.group = developer/g' /usr/local/etc/php-fpm.d/www.conf
+
 # Note: Application files are mounted via volume, not copied during build
 # This allows for live code updates during development
 
