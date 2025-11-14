@@ -19,6 +19,17 @@ help: ## Mostra esta mensagem de ajuda
 
 ##@ 🚀 Criar Projetos (Vite)
 
+create-vite: ## Cria projeto Vite (escolhe template interativamente)
+	@read -p "Nome do projeto (ex: my-app): " name; \
+	if [ -z "$$name" ]; then \
+		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
+	else \
+		echo "$(GREEN)🚀 Criando projeto com Vite...$(NC)"; \
+		echo "$(YELLOW)💡 Escolha o template na próxima tela$(NC)"; \
+		npm create vite@latest $$name; \
+		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
+	fi
+
 create-vue: ## Cria projeto Vue 3 com Vite
 	@read -p "Nome do projeto (ex: my-vue-app): " name; \
 	if [ -z "$$name" ]; then \
