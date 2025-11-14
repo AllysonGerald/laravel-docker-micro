@@ -17,42 +17,9 @@ help: ## Mostra esta mensagem de ajuda
 	@awk 'BEGIN {FS = ":.*##"; printf "\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  $(YELLOW)%-30s$(NC) %s\n", $$1, $$2 } /^##@/ { printf "\n$(BLUE)%s$(NC)\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 	@echo ""
 
-##@ 🚀 Início Rápido
+##@ 🚀 Criar Projetos (Vite)
 
-start: install dev ## Instala dependências e inicia dev server
-	@echo "$(GREEN)✅ Projeto iniciado!$(NC)"
-
-quick-start: ## Guia de início rápido
-	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
-	@echo "$(GREEN)  🚀 Guia de Início Rápido$(NC)"
-	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
-	@echo ""
-	@echo "$(YELLOW)1️⃣  Criar novo projeto:$(NC)"
-	@echo "  $(CYAN)make create-vite$(NC)        - Escolha interativa de framework"
-	@echo "  $(CYAN)make create-vue$(NC)         - Vue 3 pré-configurado"
-	@echo "  $(CYAN)make create-react$(NC)       - React pré-configurado"
-	@echo ""
-	@echo "$(YELLOW)2️⃣  Desenvolvimento:$(NC)"
-	@echo "  $(CYAN)make install$(NC)            - Instalar dependências"
-	@echo "  $(CYAN)make dev$(NC)                - Iniciar servidor"
-	@echo "  $(CYAN)make dev-open$(NC)           - Iniciar e abrir navegador"
-	@echo ""
-	@echo "$(YELLOW)3️⃣  Build e Deploy:$(NC)"
-	@echo "  $(CYAN)make build$(NC)              - Build de produção"
-	@echo "  $(CYAN)make preview$(NC)            - Testar build localmente"
-	@echo "  $(CYAN)make deploy-check$(NC)       - Verificar antes de deploy"
-	@echo ""
-	@echo "$(YELLOW)4️⃣  Qualidade:$(NC)"
-	@echo "  $(CYAN)make lint-fix$(NC)           - Corrigir problemas de lint"
-	@echo "  $(CYAN)make format$(NC)             - Formatar código"
-	@echo "  $(CYAN)make test$(NC)               - Executar testes"
-	@echo ""
-
-restart: clean-install dev ## Limpa tudo e reinicia o projeto
-
-##@ 🏗️ Criar Projetos (Vite)
-
-create-vite: ## Cria projeto Vite (escolha interativa de template)
+create-vite: ## Cria projeto Vite (escolhe template interativamente)
 	@read -p "Nome do projeto (ex: my-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -63,7 +30,7 @@ create-vite: ## Cria projeto Vite (escolha interativa de template)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
 	fi
 
-create-vue: ## Cria projeto Vue 3 com Vite (TS, Router, Pinia, Vitest)
+create-vue: ## Cria projeto Vue 3 com Vite
 	@read -p "Nome do projeto (ex: my-vue-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -73,7 +40,7 @@ create-vue: ## Cria projeto Vue 3 com Vite (TS, Router, Pinia, Vitest)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name$(NC)"; \
 	fi
 
-create-react: ## Cria projeto React com Vite (TypeScript)
+create-react: ## Cria projeto React com Vite
 	@read -p "Nome do projeto (ex: my-react-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -83,7 +50,7 @@ create-react: ## Cria projeto React com Vite (TypeScript)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
 	fi
 
-create-react-js: ## Cria projeto React (JavaScript)
+create-react-js: ## Cria projeto React (JavaScript) com Vite
 	@read -p "Nome do projeto (ex: my-react-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -93,7 +60,7 @@ create-react-js: ## Cria projeto React (JavaScript)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
 	fi
 
-create-svelte: ## Cria projeto Svelte com Vite (TypeScript)
+create-svelte: ## Cria projeto Svelte com Vite
 	@read -p "Nome do projeto (ex: my-svelte-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -103,7 +70,7 @@ create-svelte: ## Cria projeto Svelte com Vite (TypeScript)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
 	fi
 
-create-vanilla: ## Cria projeto Vanilla (TypeScript)
+create-vanilla: ## Cria projeto Vanilla (TypeScript) com Vite
 	@read -p "Nome do projeto (ex: my-vanilla-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -113,7 +80,7 @@ create-vanilla: ## Cria projeto Vanilla (TypeScript)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name && npm install$(NC)"; \
 	fi
 
-create-next: ## Cria projeto Next.js (React SSR)
+create-next: ## Cria projeto Next.js (React framework)
 	@read -p "Nome do projeto (ex: my-next-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -123,7 +90,7 @@ create-next: ## Cria projeto Next.js (React SSR)
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name$(NC)"; \
 	fi
 
-create-nuxt: ## Cria projeto Nuxt 3 (Vue SSR)
+create-nuxt: ## Cria projeto Nuxt 3 (Vue framework)
 	@read -p "Nome do projeto (ex: my-nuxt-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -143,7 +110,7 @@ create-angular: ## Cria projeto Angular
 		echo "$(GREEN)✅ Projeto criado! Acesse: cd $$name$(NC)"; \
 	fi
 
-create-remix: ## Cria projeto Remix
+create-remix: ## Cria projeto Remix (React framework)
 	@read -p "Nome do projeto (ex: my-remix-app): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome do projeto é obrigatório!$(NC)"; \
@@ -177,14 +144,13 @@ install-pnpm: ## Instala dependências com pnpm
 	@echo "$(GREEN)📦 Instalando dependências com pnpm...$(NC)"
 	@pnpm install
 
-add: ## Adiciona nova dependência (produção)
+add: ## Adiciona nova dependência
 	@read -p "Nome do pacote (ex: axios): " pkg; \
 	if [ -z "$$pkg" ]; then \
 		echo "$(RED)❌ Nome do pacote é obrigatório!$(NC)"; \
 	else \
 		echo "$(GREEN)➕ Instalando $$pkg...$(NC)"; \
 		npm install $$pkg; \
-		echo "$(GREEN)✅ Pacote $$pkg instalado!$(NC)"; \
 	fi
 
 add-dev: ## Adiciona dependência de desenvolvimento
@@ -194,17 +160,6 @@ add-dev: ## Adiciona dependência de desenvolvimento
 	else \
 		echo "$(GREEN)➕ Instalando $$pkg (dev)...$(NC)"; \
 		npm install -D $$pkg; \
-		echo "$(GREEN)✅ Pacote $$pkg instalado!$(NC)"; \
-	fi
-
-add-global: ## Adiciona pacote global
-	@read -p "Nome do pacote (ex: vercel): " pkg; \
-	if [ -z "$$pkg" ]; then \
-		echo "$(RED)❌ Nome do pacote é obrigatório!$(NC)"; \
-	else \
-		echo "$(GREEN)➕ Instalando $$pkg globalmente...$(NC)"; \
-		npm install -g $$pkg; \
-		echo "$(GREEN)✅ Pacote $$pkg instalado globalmente!$(NC)"; \
 	fi
 
 remove: ## Remove dependência
@@ -214,43 +169,15 @@ remove: ## Remove dependência
 	else \
 		echo "$(RED)🗑️  Removendo $$pkg...$(NC)"; \
 		npm uninstall $$pkg; \
-		echo "$(GREEN)✅ Pacote $$pkg removido!$(NC)"; \
 	fi
 
 update: ## Atualiza todas as dependências
 	@echo "$(YELLOW)🔄 Atualizando dependências...$(NC)"
 	@npm update
-	@echo "$(GREEN)✅ Dependências atualizadas!$(NC)"
-
-update-interactive: ## Atualiza dependências interativamente
-	@echo "$(YELLOW)🔄 Atualizando dependências (interativo)...$(NC)"
-	@npx npm-check-updates -i
-	@echo "$(GREEN)✅ Atualização concluída!$(NC)"
 
 outdated: ## Lista pacotes desatualizados
 	@echo "$(YELLOW)📋 Verificando pacotes desatualizados...$(NC)"
 	@npm outdated
-
-audit: ## Verifica vulnerabilidades de segurança
-	@echo "$(YELLOW)🔍 Verificando vulnerabilidades...$(NC)"
-	@npm audit
-
-audit-fix: ## Corrige vulnerabilidades automaticamente
-	@echo "$(YELLOW)🔧 Corrigindo vulnerabilidades...$(NC)"
-	@npm audit fix
-	@echo "$(GREEN)✅ Vulnerabilidades corrigidas!$(NC)"
-
-list: ## Lista dependências instaladas
-	@echo "$(YELLOW)📋 Dependências instaladas:$(NC)"
-	@npm list --depth=0
-
-why: ## Mostra por que um pacote está instalado
-	@read -p "Nome do pacote: " pkg; \
-	if [ -z "$$pkg" ]; then \
-		echo "$(RED)❌ Nome do pacote é obrigatório!$(NC)"; \
-	else \
-		npm why $$pkg; \
-	fi
 
 clean-install: ## Limpa node_modules e reinstala
 	@echo "$(YELLOW)🧹 Limpando e reinstalando...$(NC)"
@@ -260,21 +187,13 @@ clean-install: ## Limpa node_modules e reinstala
 
 ##@ 🛠️ Desenvolvimento
 
-dev: ## Inicia servidor de desenvolvimento
+dev: ## Inicia servidor de desenvolvimento (Vite)
 	@echo "$(GREEN)🚀 Iniciando servidor de desenvolvimento...$(NC)"
 	@npm run dev
-
-dev-open: ## Inicia dev server e abre no navegador
-	@echo "$(GREEN)🚀 Iniciando servidor e abrindo navegador...$(NC)"
-	@npm run dev -- --open
 
 dev-host: ## Inicia dev server acessível na rede local
 	@echo "$(GREEN)🚀 Iniciando servidor (host: 0.0.0.0)...$(NC)"
 	@npm run dev -- --host
-
-dev-https: ## Inicia dev server com HTTPS
-	@echo "$(GREEN)🚀 Iniciando servidor com HTTPS...$(NC)"
-	@npm run dev -- --https
 
 dev-port: ## Inicia dev server em porta customizada
 	@read -p "Porta (ex: 3000): " port; \
@@ -287,12 +206,6 @@ dev-port: ## Inicia dev server em porta customizada
 build: ## Constrói projeto para produção
 	@echo "$(GREEN)🏗️  Construindo projeto para produção...$(NC)"
 	@npm run build
-	@echo "$(GREEN)✅ Build concluído!$(NC)"
-
-build-dev: ## Build de desenvolvimento (source maps)
-	@echo "$(GREEN)🏗️  Construindo projeto (dev mode)...$(NC)"
-	@npm run build -- --mode development
-	@echo "$(GREEN)✅ Build dev concluído!$(NC)"
 
 build-watch: ## Constrói em modo watch
 	@echo "$(GREEN)🏗️  Construindo em modo watch...$(NC)"
@@ -310,97 +223,62 @@ serve: ## Serve build localmente (sem Vite)
 	@echo "$(GREEN)🌐 Servindo build localmente...$(NC)"
 	@npx serve dist
 
-serve-port: ## Serve build em porta específica
-	@read -p "Porta (ex: 5000): " port; \
-	if [ -z "$$port" ]; then \
-		port=5000; \
-	fi; \
-	echo "$(GREEN)🌐 Servindo build na porta $$port...$(NC)"; \
-	npx serve dist -p $$port
-
 ##@ 🧪 Testes
 
 test: ## Executa testes
 	@echo "$(GREEN)🧪 Executando testes...$(NC)"
-	@npm run test || echo "$(YELLOW)⚠️  Comando de teste não configurado$(NC)"
+	@npm run test
 
 test-watch: ## Executa testes em modo watch
 	@echo "$(GREEN)🧪 Executando testes em modo watch...$(NC)"
-	@npm run test -- --watch || echo "$(YELLOW)⚠️  Comando de teste não configurado$(NC)"
+	@npm run test -- --watch
 
 test-coverage: ## Executa testes com cobertura
 	@echo "$(GREEN)🧪 Executando testes com cobertura...$(NC)"
-	@npm run test -- --coverage || echo "$(YELLOW)⚠️  Comando de teste não configurado$(NC)"
+	@npm run test -- --coverage
 
 test-ui: ## Executa testes com UI (Vitest)
 	@echo "$(GREEN)🧪 Abrindo UI de testes...$(NC)"
-	@npm run test -- --ui || echo "$(YELLOW)⚠️  Comando de teste não configurado$(NC)"
-
-test-e2e: ## Executa testes end-to-end
-	@echo "$(GREEN)🧪 Executando testes E2E...$(NC)"
-	@npm run test:e2e || npx playwright test || echo "$(YELLOW)⚠️  Testes E2E não configurados$(NC)"
+	@npm run test -- --ui
 
 ##@ 🎨 Linting e Formatação
 
 lint: ## Executa linter
 	@echo "$(GREEN)🔍 Executando linter...$(NC)"
-	@npm run lint || echo "$(YELLOW)⚠️  Linter não configurado$(NC)"
+	@npm run lint
 
 lint-fix: ## Corrige problemas do linter automaticamente
 	@echo "$(GREEN)🔧 Corrigindo problemas do linter...$(NC)"
-	@npm run lint -- --fix || npm run lint:fix || echo "$(YELLOW)⚠️  Linter não configurado$(NC)"
-	@echo "$(GREEN)✅ Problemas corrigidos!$(NC)"
+	@npm run lint -- --fix
 
 format: ## Formata código (Prettier)
 	@echo "$(GREEN)✨ Formatando código...$(NC)"
-	@npm run format || npx prettier --write "src/**/*.{js,jsx,ts,tsx,vue,svelte,css,scss,json}" || echo "$(YELLOW)⚠️  Prettier não instalado$(NC)"
-	@echo "$(GREEN)✅ Código formatado!$(NC)"
+	@npm run format || npx prettier --write "src/**/*.{js,jsx,ts,tsx,vue,svelte,css,scss,json}"
 
 format-check: ## Verifica formatação sem alterar
 	@echo "$(GREEN)🔍 Verificando formatação...$(NC)"
-	@npm run format:check || npx prettier --check "src/**/*.{js,jsx,ts,tsx,vue,svelte,css,scss,json}" || echo "$(YELLOW)⚠️  Prettier não instalado$(NC)"
+	@npm run format:check || npx prettier --check "src/**/*.{js,jsx,ts,tsx,vue,svelte,css,scss,json}"
 
 type-check: ## Verifica tipos TypeScript
 	@echo "$(GREEN)🔍 Verificando tipos TypeScript...$(NC)"
-	@npm run type-check || npx tsc --noEmit || echo "$(YELLOW)⚠️  TypeScript não configurado$(NC)"
-
-check-all: lint format-check type-check ## Executa todas as verificações
-
-fix-all: lint-fix format ## Corrige lint e formata código
+	@npm run type-check || npx tsc --noEmit
 
 ##@ 🏗️ Build e Deploy
 
 analyze: ## Analisa tamanho do bundle
 	@echo "$(GREEN)📊 Analisando bundle...$(NC)"
-	@npm run build -- --mode analyze || npx vite-bundle-visualizer || echo "$(YELLOW)⚠️  Visualizador não instalado$(NC)"
+	@npm run build && npx vite-bundle-visualizer
 
 build-stats: ## Mostra estatísticas da build
 	@echo "$(GREEN)📊 Gerando estatísticas da build...$(NC)"
-	@npm run build -- --report || npm run build
-	@echo "$(GREEN)✅ Build concluído!$(NC)"
+	@npm run build -- --report
 
 deploy-check: ## Verifica build antes de deploy
 	@echo "$(GREEN)✅ Verificando build para deploy...$(NC)"
-	@echo "$(YELLOW)1/4 Verificando tipos...$(NC)"
-	@npm run type-check 2>/dev/null || npx tsc --noEmit 2>/dev/null || echo "$(YELLOW)⚠️  TypeScript não configurado$(NC)"
-	@echo "$(YELLOW)2/4 Executando linter...$(NC)"
-	@npm run lint 2>/dev/null || echo "$(YELLOW)⚠️  Linter não configurado$(NC)"
-	@echo "$(YELLOW)3/4 Executando testes...$(NC)"
-	@npm run test 2>/dev/null || echo "$(YELLOW)⚠️  Testes não configurados$(NC)"
-	@echo "$(YELLOW)4/4 Construindo projeto...$(NC)"
 	@npm run build
+	@npm run test || echo "$(YELLOW)⚠️  Testes não configurados$(NC)"
+	@npm run lint || echo "$(YELLOW)⚠️  Linter não configurado$(NC)"
 	@echo "$(GREEN)✅ Build verificado com sucesso!$(NC)"
-
-size: ## Mostra tamanho dos arquivos da build
-	@echo "$(YELLOW)📊 Tamanho da build:$(NC)"
-	@if [ -d "dist" ]; then \
-		du -sh dist; \
-		echo ""; \
-		echo "$(YELLOW)Maiores arquivos:$(NC)"; \
-		find dist -type f -exec du -h {} + | sort -rh | head -10; \
-	else \
-		echo "$(RED)❌ Diretório dist não encontrado. Execute 'make build' primeiro.$(NC)"; \
-	fi
 
 ##@ 🎨 Componentes e Arquitetura
 
@@ -421,7 +299,7 @@ create-component: ## Cria componente (Vue/React)
 		echo "$(GREEN)✅ Componente criado em src/components/$$name/$(NC)"; \
 	fi
 
-create-page: ## Cria página/rota
+create-page: ## Cria página/rota (Vue Router/React Router)
 	@read -p "Nome da página (ex: About): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome da página é obrigatório!$(NC)"; \
@@ -458,7 +336,7 @@ create-hook: ## Cria custom hook (React)
 		echo "$(GREEN)✅ Hook criado em src/hooks/$$name.ts$(NC)"; \
 	fi
 
-create-store: ## Cria store (Pinia/Zustand)
+create-store: ## Cria store (Pinia/Vuex/Zustand)
 	@read -p "Nome da store (ex: userStore): " name; \
 	if [ -z "$$name" ]; then \
 		echo "$(RED)❌ Nome da store é obrigatório!$(NC)"; \
@@ -484,17 +362,6 @@ create-api: ## Cria arquivo de API/service
 		echo "$(GREEN)✅ API criada em src/api/$$name.ts$(NC)"; \
 	fi
 
-create-util: ## Cria arquivo de utilitário
-	@read -p "Nome do utilitário (ex: formatDate): " name; \
-	if [ -z "$$name" ]; then \
-		echo "$(RED)❌ Nome é obrigatório!$(NC)"; \
-	else \
-		echo "$(GREEN)📝 Criando utilitário $$name...$(NC)"; \
-		mkdir -p src/utils; \
-		echo "/**\n * $$name utility function\n */\nexport function $$name() {\n  // Implementation\n}" > src/utils/$$name.ts; \
-		echo "$(GREEN)✅ Utilitário criado em src/utils/$$name.ts$(NC)"; \
-	fi
-
 ##@ 🔧 Configuração e Setup
 
 setup-vite: ## Configura Vite no projeto atual
@@ -510,7 +377,7 @@ setup-typescript: ## Adiciona TypeScript ao projeto
 
 setup-eslint: ## Configura ESLint
 	@echo "$(GREEN)⚙️  Configurando ESLint...$(NC)"
-	@npm install -D eslint
+	@npm install -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react
 	@npx eslint --init
 	@echo "$(GREEN)✅ ESLint configurado!$(NC)"
 
@@ -525,10 +392,6 @@ setup-tailwind: ## Instala e configura Tailwind CSS
 	@npm install -D tailwindcss postcss autoprefixer
 	@npx tailwindcss init -p
 	@echo "$(GREEN)✅ Tailwind CSS configurado!$(NC)"
-	@echo "$(YELLOW)💡 Adicione ao seu CSS principal:$(NC)"
-	@echo "  @tailwind base;"
-	@echo "  @tailwind components;"
-	@echo "  @tailwind utilities;"
 
 setup-router: ## Instala router (Vue Router ou React Router)
 	@if [ -f "package.json" ] && grep -q "vue" package.json; then \
@@ -540,12 +403,12 @@ setup-router: ## Instala router (Vue Router ou React Router)
 	fi
 	@echo "$(GREEN)✅ Router instalado!$(NC)"
 
-setup-pinia: ## Instala Pinia (state management Vue)
+setup-pinia: ## Instala Pinia (gerenciamento de estado Vue)
 	@echo "$(GREEN)⚙️  Instalando Pinia...$(NC)"
 	@npm install pinia
 	@echo "$(GREEN)✅ Pinia instalado!$(NC)"
 
-setup-zustand: ## Instala Zustand (state management React)
+setup-zustand: ## Instala Zustand (gerenciamento de estado React)
 	@echo "$(GREEN)⚙️  Instalando Zustand...$(NC)"
 	@npm install zustand
 	@echo "$(GREEN)✅ Zustand instalado!$(NC)"
@@ -554,58 +417,6 @@ setup-axios: ## Instala Axios para requisições HTTP
 	@echo "$(GREEN)⚙️  Instalando Axios...$(NC)"
 	@npm install axios
 	@echo "$(GREEN)✅ Axios instalado!$(NC)"
-
-setup-tanstack-query: ## Instala TanStack Query (React Query)
-	@echo "$(GREEN)⚙️  Instalando TanStack Query...$(NC)"
-	@npm install @tanstack/react-query
-	@echo "$(GREEN)✅ TanStack Query instalado!$(NC)"
-
-setup-vitest: ## Configura Vitest para testes
-	@echo "$(GREEN)⚙️  Configurando Vitest...$(NC)"
-	@npm install -D vitest @vitest/ui
-	@echo "$(GREEN)✅ Vitest configurado!$(NC)"
-
-setup-playwright: ## Configura Playwright para testes E2E
-	@echo "$(GREEN)⚙️  Configurando Playwright...$(NC)"
-	@npm install -D @playwright/test
-	@npx playwright install
-	@echo "$(GREEN)✅ Playwright configurado!$(NC)"
-
-##@ 🌍 Ambiente e Variáveis
-
-env: ## Cria arquivo .env de exemplo
-	@if [ ! -f ".env" ]; then \
-		echo "$(GREEN)📝 Criando arquivo .env...$(NC)"; \
-		echo "# API Configuration" > .env; \
-		echo "VITE_API_URL=http://localhost:8080" >> .env; \
-		echo "VITE_API_BASE=http://localhost:8080/api" >> .env; \
-		echo "" >> .env; \
-		echo "# App Configuration" >> .env; \
-		echo "VITE_APP_NAME=My App" >> .env; \
-		echo "VITE_APP_VERSION=1.0.0" >> .env; \
-		echo "$(GREEN)✅ Arquivo .env criado!$(NC)"; \
-	else \
-		echo "$(YELLOW)⚠️  Arquivo .env já existe$(NC)"; \
-	fi
-
-env-example: ## Cria .env.example
-	@echo "$(GREEN)📝 Criando .env.example...$(NC)"
-	@echo "# API Configuration" > .env.example
-	@echo "VITE_API_URL=http://localhost:8080" >> .env.example
-	@echo "VITE_API_BASE=http://localhost:8080/api" >> .env.example
-	@echo "" >> .env.example
-	@echo "# App Configuration" >> .env.example
-	@echo "VITE_APP_NAME=My App" >> .env.example
-	@echo "VITE_APP_VERSION=1.0.0" >> .env.example
-	@echo "$(GREEN)✅ Arquivo .env.example criado!$(NC)"
-
-env-show: ## Mostra variáveis de ambiente
-	@echo "$(YELLOW)🔑 Variáveis de ambiente (VITE_*):$(NC)"
-	@if [ -f ".env" ]; then \
-		grep "^VITE_" .env || echo "$(YELLOW)Nenhuma variável VITE_ encontrada$(NC)"; \
-	else \
-		echo "$(RED)❌ Arquivo .env não encontrado$(NC)"; \
-	fi
 
 ##@ 🧹 Limpeza
 
@@ -617,7 +428,6 @@ clean: ## Remove arquivos temporários e cache
 	@rm -rf .next
 	@rm -rf .nuxt
 	@rm -rf .svelte-kit
-	@rm -rf coverage
 	@echo "$(GREEN)✅ Limpeza concluída!$(NC)"
 
 clean-all: ## Limpeza completa (inclui node_modules)
@@ -625,23 +435,78 @@ clean-all: ## Limpeza completa (inclui node_modules)
 	@read -p "Continuar? [s/N]: " confirm; \
 	if [ "$$confirm" = "s" ] || [ "$$confirm" = "S" ]; then \
 		rm -rf node_modules package-lock.json yarn.lock pnpm-lock.yaml; \
-		rm -rf dist node_modules/.vite .turbo .next .nuxt .svelte-kit coverage; \
+		rm -rf dist node_modules/.vite .turbo .next .nuxt .svelte-kit; \
 		echo "$(GREEN)✅ Limpeza completa concluída!$(NC)"; \
 	else \
-		echo "$(YELLOW)Cancelado.$(NC)"; \
+		echo "Cancelado."; \
 	fi
 
-clean-build: ## Remove apenas a pasta dist
-	@echo "$(YELLOW)🧹 Removendo pasta dist...$(NC)"
-	@rm -rf dist
-	@echo "$(GREEN)✅ Pasta dist removida!$(NC)"
+##@ 🔥 Laravel Livewire
 
-clean-cache: ## Limpa cache do npm/yarn/pnpm
-	@echo "$(YELLOW)🧹 Limpando cache...$(NC)"
-	@npm cache clean --force 2>/dev/null || yarn cache clean 2>/dev/null || pnpm store prune 2>/dev/null
-	@echo "$(GREEN)✅ Cache limpo!$(NC)"
+livewire-info: ## Mostra informações sobre Livewire no backend
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)🔥 Laravel Livewire - Comandos Disponíveis$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Para usar Livewire, execute os comandos no diretório backend:$(NC)"
+	@echo ""
+	@echo "  $(GREEN)cd ../backend$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Comandos disponíveis:$(NC)"
+	@echo "  make livewire-install      - Instala Livewire"
+	@echo "  make livewire-make         - Cria componente Livewire"
+	@echo "  make livewire-delete       - Remove componente"
+	@echo "  make livewire-move         - Move componente"
+	@echo "  make livewire-copy         - Copia componente"
+	@echo "  make livewire-discover     - Descobre componentes"
+	@echo ""
+	@echo "$(CYAN)📖 Documentação completa: frontend/README.md#-laravel-livewire---guia-completo$(NC)"
+	@echo ""
 
-##@ 📊 Informações e Diagnóstico
+livewire-check: ## Verifica se Livewire está instalado no backend
+	@echo "$(YELLOW)🔍 Verificando Livewire no backend...$(NC)"
+	@if [ -f "../backend/laravel/composer.json" ]; then \
+		if grep -q "livewire" ../backend/laravel/composer.json; then \
+			echo "$(GREEN)✅ Livewire está instalado!$(NC)"; \
+		else \
+			echo "$(RED)❌ Livewire não está instalado$(NC)"; \
+			echo "$(YELLOW)💡 Execute: cd ../backend && make livewire-install$(NC)"; \
+		fi; \
+	else \
+		echo "$(RED)❌ Laravel não encontrado em ../backend/laravel/$(NC)"; \
+	fi
+
+livewire-create-view: ## Cria view Blade para componente Livewire
+	@read -p "Nome do componente (ex: UserTable): " name; \
+	if [ -z "$$name" ]; then \
+		echo "$(RED)❌ Nome é obrigatório!$(NC)"; \
+	else \
+		view_path="../backend/laravel/resources/views/livewire/$$(echo $$name | tr '[:upper:]' '[:lower:]').blade.php"; \
+		mkdir -p $$(dirname $$view_path); \
+		echo "<div>\n    <!-- $$name component -->\n</div>" > $$view_path; \
+		echo "$(GREEN)✅ View criada em: $$view_path$(NC)"; \
+		echo "$(YELLOW)💡 Agora crie o componente: cd ../backend && make livewire-make name=$$name$(NC)"; \
+	fi
+
+livewire-list-components: ## Lista componentes Livewire instalados
+	@echo "$(YELLOW)📋 Componentes Livewire encontrados:$(NC)"
+	@if [ -d "../backend/laravel/app/Livewire" ]; then \
+		find ../backend/laravel/app/Livewire -name "*.php" -type f | while read file; do \
+			component=$$(basename $$file .php); \
+			echo "  $(GREEN)•$(NC) $$component"; \
+		done; \
+	else \
+		echo "$(RED)❌ Diretório Livewire não encontrado$(NC)"; \
+		echo "$(YELLOW)💡 Execute: cd ../backend && make livewire-install$(NC)"; \
+	fi
+
+livewire-docs: ## Abre documentação do Livewire no navegador
+	@echo "$(GREEN)📖 Abrindo documentação do Livewire...$(NC)"
+	@xdg-open https://livewire.laravel.com 2>/dev/null || \
+	 open https://livewire.laravel.com 2>/dev/null || \
+	 echo "$(YELLOW)💡 Acesse: https://livewire.laravel.com$(NC)"
+
+##@ 📊 Informações
 
 info: ## Mostra informações do projeto
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
@@ -662,11 +527,10 @@ info: ## Mostra informações do projeto
 	@if [ -f ".eslintrc" ] || [ -f ".eslintrc.json" ] || [ -f ".eslintrc.js" ]; then \
 		echo "$(GREEN)✅ ESLint configurado$(NC)"; \
 	fi
-	@if [ -f ".prettierrc" ] || [ -f ".prettierrc.json" ] || [ -f ".prettierrc.js" ]; then \
-		echo "$(GREEN)✅ Prettier configurado$(NC)"; \
-	fi
-	@if [ -f "tailwind.config.js" ] || [ -f "tailwind.config.ts" ]; then \
-		echo "$(GREEN)✅ Tailwind CSS configurado$(NC)"; \
+	@echo ""
+	@echo "$(YELLOW)📊 Dependências:$(NC)"
+	@if [ -f "package.json" ]; then \
+		echo "  Total: $$(cat package.json | grep -c '"dependencies"') dependências"; \
 	fi
 	@echo ""
 
@@ -684,68 +548,3 @@ version: ## Mostra versões das ferramentas
 	fi
 	@echo ""
 
-status: ## Mostra status do projeto
-	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
-	@echo "$(GREEN)📊 Status do Projeto$(NC)"
-	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
-	@echo ""
-	@if [ -d "node_modules" ]; then \
-		echo "$(GREEN)✅ node_modules existe$(NC)"; \
-	else \
-		echo "$(RED)❌ node_modules não encontrado. Execute: make install$(NC)"; \
-	fi
-	@if [ -d "dist" ]; then \
-		echo "$(GREEN)✅ Build existe (dist/)$(NC)"; \
-		echo "   Tamanho: $$(du -sh dist | cut -f1)"; \
-	else \
-		echo "$(YELLOW)⚠️  Build não encontrado. Execute: make build$(NC)"; \
-	fi
-	@if [ -f ".env" ]; then \
-		echo "$(GREEN)✅ Arquivo .env configurado$(NC)"; \
-	else \
-		echo "$(YELLOW)⚠️  Arquivo .env não encontrado. Execute: make env$(NC)"; \
-	fi
-	@echo ""
-
-tree: ## Mostra estrutura de pastas do src
-	@if command -v tree > /dev/null; then \
-		echo "$(YELLOW)📂 Estrutura do projeto:$(NC)"; \
-		tree -L 3 -I 'node_modules|dist|.git' --dirsfirst; \
-	else \
-		echo "$(YELLOW)📂 Estrutura do projeto (simplificada):$(NC)"; \
-		find src -type d -not -path '*/node_modules/*' | head -20; \
-	fi
-
-ports: ## Mostra portas em uso
-	@echo "$(YELLOW)🔌 Portas em uso (5173, 4173, 3000, 5000):$(NC)"
-	@netstat -tuln 2>/dev/null | grep -E ':(5173|4173|3000|5000)' || lsof -i :5173,4173,3000,5000 2>/dev/null || echo "$(GREEN)Nenhuma porta ocupada$(NC)"
-
-##@ 📚 Documentação e Ajuda
-
-docs: ## Abre documentação relevante
-	@echo "$(GREEN)📖 Abrindo documentação...$(NC)"
-	@if [ -f "package.json" ] && grep -q "vue" package.json; then \
-		xdg-open https://vuejs.org 2>/dev/null || open https://vuejs.org 2>/dev/null || echo "Vue: https://vuejs.org"; \
-	elif [ -f "package.json" ] && grep -q "react" package.json; then \
-		xdg-open https://react.dev 2>/dev/null || open https://react.dev 2>/dev/null || echo "React: https://react.dev"; \
-	fi
-	@xdg-open https://vitejs.dev 2>/dev/null || open https://vitejs.dev 2>/dev/null || echo "Vite: https://vitejs.dev"
-
-docs-vite: ## Abre documentação do Vite
-	@echo "$(GREEN)📖 Abrindo documentação do Vite...$(NC)"
-	@xdg-open https://vitejs.dev 2>/dev/null || open https://vitejs.dev 2>/dev/null || echo "$(YELLOW)💡 Acesse: https://vitejs.dev$(NC)"
-
-docs-vue: ## Abre documentação do Vue
-	@echo "$(GREEN)📖 Abrindo documentação do Vue...$(NC)"
-	@xdg-open https://vuejs.org 2>/dev/null || open https://vuejs.org 2>/dev/null || echo "$(YELLOW)💡 Acesse: https://vuejs.org$(NC)"
-
-docs-react: ## Abre documentação do React
-	@echo "$(GREEN)📖 Abrindo documentação do React...$(NC)"
-	@xdg-open https://react.dev 2>/dev/null || open https://react.dev 2>/dev/null || echo "$(YELLOW)💡 Acesse: https://react.dev$(NC)"
-
-readme: ## Exibe README.md
-	@if [ -f "README.md" ]; then \
-		cat README.md; \
-	else \
-		echo "$(RED)❌ README.md não encontrado$(NC)"; \
-	fi
