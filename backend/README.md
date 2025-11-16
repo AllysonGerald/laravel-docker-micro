@@ -537,7 +537,7 @@ make docker-info               # Informações de uso do Docker
 
 Ver todos os comandos Docker: `make help | grep docker` ou `make help | grep container` ou `make help | grep image`
 
-#### 🔍 Qualidade de Código (44 comandos)
+#### 🔍 Qualidade de Código (50+ comandos)
 
 ```bash
 # PHP Insights
@@ -551,10 +551,19 @@ make phpstan-analyze          # Análise estática (nível 0)
 make phpstan-analyze-strict   # Análise rigorosa (nível 9)
 make phpstan-baseline         # Gera baseline
 
-# PHP CS Fixer
+# PHP CS Fixer (15 comandos disponíveis)
 make phpcs-install            # Instala PHP CS Fixer
 make phpcs-check              # Verifica estilo (sem alterar)
+make phpcs-check-app          # Verifica apenas app/
 make phpcs-fix                # Corrige estilo automaticamente
+make phpcs-fix-app            # Corrige apenas app/
+make phpcs-fix-controllers    # Corrige apenas Controllers
+make phpcs-fix-models         # Corrige apenas Models
+make phpcs-fix-services       # Corrige apenas Services
+make phpcs-fix-repositories   # Corrige apenas Repositories
+make phpcs-version            # Mostra versão instalada
+make phpcs-describe           # Descreve regras ativas
+make phpcs-config             # Mostra configuração atual
 
 # Laravel Pint
 make pint-install             # Instala Laravel Pint
@@ -576,6 +585,58 @@ make quality-install-all      # Instala todas as ferramentas
 ```
 
 Ver todos os comandos de qualidade: `make help | grep -E "quality|phpinsights|phpstan|phpcs|pint|phpmd|psalm"`
+
+#### ⚙️ Padrões de Código Configurados
+
+Este projeto já vem com **PHP CS Fixer configurado** seguindo as melhores práticas:
+
+**Arquivo:** `laravel/.php-cs-fixer.dist.php`
+
+**Regras Aplicadas:**
+- ✅ **@PSR12** - Padrão PSR-12 completo
+- ✅ **@Symfony** - Convenções Symfony
+- ✅ **@PHP82Migration** - Migração para PHP 8.2+
+- ✅ **declare_strict_types** - Tipagem estrita
+- ✅ **void_return** - Retorno void explícito
+- ✅ **yoda_style** - Estilo Yoda nas comparações
+- ✅ **array_syntax short** - Sintaxe curta de arrays []
+
+**Como Usar:**
+
+```bash
+# 1. Instalar PHP CS Fixer (primeira vez)
+make phpcs-install
+
+# 2. Verificar código antes de commitar
+make phpcs-check
+
+# 3. Corrigir automaticamente
+make phpcs-fix
+
+# 4. Ver versão instalada
+make phpcs-version
+```
+
+**Workflow Recomendado:**
+
+```bash
+# Antes de fazer commit
+make phpcs-check          # Verifica problemas
+make test                 # Executa testes
+make git-add              # Adiciona arquivos
+make git-commit           # Faz commit
+```
+
+**Arquivos Ignorados pelo Git:**
+- `.php-cs-fixer.cache` - Cache do PHP CS Fixer
+- `.php-cs-fixer.php` - Configuração local personalizada
+
+**Customizar Regras:**
+
+Se quiser personalizar as regras localmente:
+1. Copie `.php-cs-fixer.dist.php` para `.php-cs-fixer.php`
+2. Edite `.php-cs-fixer.php` com suas regras
+3. O arquivo `.php-cs-fixer.php` é ignorado pelo Git (configuração local)
 
 #### 📚 Documentação API
 
